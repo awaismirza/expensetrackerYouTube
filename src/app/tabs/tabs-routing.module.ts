@@ -8,45 +8,55 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'dashboard',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../pages/dashboard/dashboard.module').then(m => m.DashboardModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'settings',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../pages/account/account.module').then(m => m.AccountModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'budget',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../pages/budget/budget.module').then(m => m.BudgetModule)
+          }
+        ]
+      },
+        {
+        path: 'activity',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/activity/activity.module').then(m => m.ActivityModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/dashboard',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/dashboard',
     pathMatch: 'full'
   }
 ];
