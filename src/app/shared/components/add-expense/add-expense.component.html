@@ -1,12 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Add Expense</ion-title>
-    <ion-button slot="end" fill="outline" (click)="dismissModal()">
-      X
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Add Expense</ion-title>
+        <ion-button slot="end" fill="outline" (click)="dismissModal()">
+            X
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <form [formGroup]="addExpenseForm">
 
+        <ion-item>
+            <ion-input placeholder="Type Amount" type="text" formControlName="amount"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-textarea placeholder="Type Description" type="text" formControlName="description"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Select Type</ion-label>
+            <ion-select value="" okText="Ok" cancelText="Cancel" interface="popover" formControlName="type">
+                <ion-select-option value="brown">Brown</ion-select-option>
+                <ion-select-option value="blonde">Blonde</ion-select-option>
+                <ion-select-option value="black">Black</ion-select-option>
+                <ion-select-option value="red">Red</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-button color="primary" fill="solid" expand="block">add</ion-button>
+        <ion-button color="primary" fill="solid" expand="block">Cancel</ion-button>
+    </form>
 </ion-content>

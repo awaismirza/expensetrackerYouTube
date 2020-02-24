@@ -4,5 +4,6 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
-  "cordova": {}
+  "cordova": {},
+  "bundledWebRuntime": true
 }
