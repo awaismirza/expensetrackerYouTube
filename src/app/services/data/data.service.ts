@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {ExpenseInterface} from '../../interface/expenseInterface';
-import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +22,7 @@ export class DataService {
         return this._expense.next(expenses);
     }
 
-    getExpensesSubsciption(): BehaviorSubject<ExpenseInterface> {
+    getExpensesSubscription(): BehaviorSubject<ExpenseInterface> {
         return this._expense;
     }
 

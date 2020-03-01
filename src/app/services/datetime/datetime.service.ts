@@ -12,5 +12,8 @@ export class DatetimeService {
     return moment().toDate();
   }
 
+  getDateTimeISO(date?: Date): string {
+    return date ? moment(date).format('L') : moment().format('L');
+  }
 
 }

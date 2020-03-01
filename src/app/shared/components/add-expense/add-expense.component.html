@@ -11,7 +11,7 @@
     <form [formGroup]="addExpenseForm">
 
         <ion-item>
-            <ion-input placeholder="Type Amount" type="text" formControlName="amount"></ion-input>
+            <ion-input placeholder="Type Amount" type="number" formControlName="amount"></ion-input>
         </ion-item>
         <ion-item>
             <ion-textarea placeholder="Type Description" type="text" formControlName="description"></ion-textarea>
@@ -20,13 +20,35 @@
         <ion-item>
             <ion-label>Select Type</ion-label>
             <ion-select value="" okText="Ok" cancelText="Cancel" interface="popover" formControlName="type">
-                <ion-select-option value="general">General</ion-select-option>
-                <ion-select-option value="shopping">Shopping</ion-select-option>
-                <ion-select-option value="movie">Movie</ion-select-option>
-                <ion-select-option value="dinner">Dinner</ion-select-option>
+                <ion-select-option value="Games">Games</ion-select-option>
+                <ion-select-option value="Movies">Movies</ion-select-option>
+                <ion-select-option value="Sports">Sports</ion-select-option>
+                <ion-select-option value="Dining Out">Dining Out</ion-select-option>
+                <ion-select-option value="Groceries">Groceries</ion-select-option>
+                <ion-select-option value="Electronics">Electronics</ion-select-option>
+                <ion-select-option value="Furniture">Furniture</ion-select-option>
+                <ion-select-option value="Maintenance">Maintenance</ion-select-option>
+                <ion-select-option value="Mortgage">Mortgage</ion-select-option>
+                <ion-select-option value="Pets">Pets</ion-select-option>
+                <ion-select-option value="Rent">Rent</ion-select-option>
+                <ion-select-option value="Services">Services</ion-select-option>
+                <ion-select-option value="Clothing">Clothing</ion-select-option>
+                <ion-select-option value="Gifts">Gifts</ion-select-option>
+                <ion-select-option value="Insurance">Insurance</ion-select-option>
+                <ion-select-option value="Medical">Medical</ion-select-option>
+                <ion-select-option value="Taxes">Taxes</ion-select-option>
+                <ion-select-option value="General">General</ion-select-option>
+                <ion-select-option value="Cleaning">Cleaning</ion-select-option>
+                <ion-select-option value="Electricity">Electricity</ion-select-option>
+                <ion-select-option value="Gas">Gas</ion-select-option>
+                <ion-select-option value="Internet">Internet</ion-select-option>
+                <ion-select-option value="Mobile">Mobile</ion-select-option>
+                <ion-select-option value="Water">Water</ion-select-option>
+                <ion-select-option value="Others">Other</ion-select-option>
             </ion-select>
         </ion-item>
         <br>
-        <ion-button color="primary" fill="solid" size="large" expand="block" (click)="initCreateExpense()">add</ion-button>
+        <ion-button color="primary" fill="solid" size="large" expand="block"
+                    (click)="initCreateExpense()" [disabled]="!addExpenseForm.valid">add</ion-button>
     </form>
 </ion-content>
