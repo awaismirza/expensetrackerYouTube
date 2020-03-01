@@ -20,13 +20,13 @@
         <ion-item>
             <ion-label>Select Type</ion-label>
             <ion-select value="" okText="Ok" cancelText="Cancel" interface="popover" formControlName="type">
-                <ion-select-option value="brown">Brown</ion-select-option>
-                <ion-select-option value="blonde">Blonde</ion-select-option>
-                <ion-select-option value="black">Black</ion-select-option>
-                <ion-select-option value="red">Red</ion-select-option>
+                <ion-select-option value="general">General</ion-select-option>
+                <ion-select-option value="shopping">Shopping</ion-select-option>
+                <ion-select-option value="movie">Movie</ion-select-option>
+                <ion-select-option value="dinner">Dinner</ion-select-option>
             </ion-select>
         </ion-item>
-        <ion-button color="primary" fill="solid" expand="block">add</ion-button>
-        <ion-button color="primary" fill="solid" expand="block">Cancel</ion-button>
+        <br>
+        <ion-button color="primary" fill="solid" size="large" expand="block" (click)="initCreateExpense()">add</ion-button>
     </form>
 </ion-content>

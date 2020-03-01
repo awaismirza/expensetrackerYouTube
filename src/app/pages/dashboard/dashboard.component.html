@@ -28,7 +28,7 @@
             </ion-row>
         </ion-footer>
     </ion-card>
-    <ion-card>
+    <ion-card *ngFor="let expense of expenses">
         <ion-toolbar color="primary">
             <ion-buttons slot="end">
                 <ion-button>
@@ -38,16 +38,16 @@
                     <ion-icon src="assets/icon/pencil-outline.svg" size="large"></ion-icon>
                 </ion-button>
             </ion-buttons>
-            <ion-title slot="start">Amount</ion-title>
+            <ion-title slot="start">{{expense.amount}}</ion-title>
         </ion-toolbar>
         <ion-card-content>
-            Description
+            {{expense.description}}
             <ion-footer>
                 <ion-label>
-                    Date and Time
+                    {{expense.createdOn | date}}
                 </ion-label>
                 <ion-label>
-                    Type
+                    {{expense.type}}
                 </ion-label>
             </ion-footer>
         </ion-card-content>
