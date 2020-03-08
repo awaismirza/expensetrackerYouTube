@@ -1,11 +1,6 @@
 <ion-header>
-    <ion-toolbar color="secondary" class="ion-text-center">
-        <ion-title>Dashboard</ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <ion-card>
+    <ion-toolbar class="ion-text-center">
+        <ion-card no-margin>
         <ion-card-header color="primary">
             <ion-card-title>
                 Total: 500$
@@ -17,29 +12,32 @@
         <ion-footer>
             <ion-row>
                 <ion-col size="3">
-                    <ion-button expand="full" fill="clear" (click)="setCurrentToTodayDate()" >Today</ion-button>
+                    <ion-button expand="full" fill="solid" (click)="setCurrentToTodayDate()" >Today</ion-button>
                 </ion-col>
                 <ion-col size="3">
-                    <ion-item lines="none">
-                        <ion-button color="primary">Date</ion-button>
-                        <ion-datetime
+                    <ion-button color="primary" expand="full" fill="solid" (click)="selected.open()">Date</ion-button>
+                        <ion-datetime hidden
                                 #selected
                                 [value]="selectedDate.toISOString()"
                                 (ionChange)="changeSelectedDate(selected.value)"
                                 min="2020"
                                 [max]="selectedDate.toISOString()"
                         ></ion-datetime>
-                    </ion-item>
                 </ion-col>
                 <ion-col size="3">
-                    <ion-button expand="full" fill="clear">Catagory</ion-button>
+                    <ion-button expand="full" fill="solid">Catagory</ion-button>
                 </ion-col>
                 <ion-col size="3">
-                    <ion-button expand="full" fill="clear">amount</ion-button>
+                    <ion-button expand="full" fill="solid">Filter</ion-button>
                 </ion-col>
             </ion-row>
         </ion-footer>
     </ion-card>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
     <ion-card *ngFor="let expense of expenses">
         <ion-toolbar color="primary">
             <ion-buttons slot="end">

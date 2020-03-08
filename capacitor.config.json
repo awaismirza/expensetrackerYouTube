@@ -1,9 +1,8 @@
 {
   "appId": "io.ionic.starter",
   "appName": "expenselogger",
-  "bundledWebRuntime": false,
+  "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "www",
-  "cordova": {},
-  "bundledWebRuntime": true
+  "cordova": {}
 }

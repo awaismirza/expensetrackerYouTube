@@ -32,5 +32,4 @@ export class ActionService {
 			this.dataService.setExpenses(expenses);
 		})
 	}
-
 }
