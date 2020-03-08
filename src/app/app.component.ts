@@ -40,7 +40,6 @@ export class AppComponent {
       }else {
         this.storageService.saveToLocalStorage(StorageKeys.INSTALL_DATE, this.datetimeService.getCurrentDateTime());
       }
-      this.datetimeService.todayDate = this.datetimeService.getCurrentDateTime();
     });
 
   }

@@ -24,9 +24,10 @@
                         <ion-button color="primary">Date</ion-button>
                         <ion-datetime
                                 #selected
+                                [value]="selectedDate.toISOString()"
                                 (ionChange)="changeSelectedDate(selected.value)"
                                 min="2020"
-                                [max]="todayDate.toISOString()"
+                                [max]="selectedDate.toISOString()"
                         ></ion-datetime>
                     </ion-item>
                 </ion-col>

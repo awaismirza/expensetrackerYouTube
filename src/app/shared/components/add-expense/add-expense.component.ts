@@ -7,45 +7,48 @@ import {DatetimeService} from '../../../services/datetime/datetime.service';
 import {error} from 'util';
 
 @Component({
-    selector: 'app-add-expense',
-    templateUrl: './add-expense.component.html',
-    styleUrls: ['./add-expense.component.scss'],
+	selector: 'app-add-expense',
+	templateUrl: './add-expense.component.html',
+	styleUrls: ['./add-expense.component.scss'],
 })
 export class AddExpenseComponent implements OnInit {
 
 
-    expenseForm: ExpenseInterface;
+	expenseForm: ExpenseInterface;
 
 
-    addExpenseForm = new FormGroup({
-        amount: new FormControl('', Validators.required),
-        description: new FormControl(''),
-        type: new FormControl('', Validators.required),
-    });
+	addExpenseForm = new FormGroup({
+		amount: new FormControl('', Validators.required),
+		description: new FormControl(''),
+		type: new FormControl('', Validators.required),
+	});
 
-    constructor(
-        private modalController: ModalController,
-        private actionService: ActionService,
-        private dateTimeService: DatetimeService
+	constructor(
+		private modalController: ModalController,
+		private actionService: ActionService,
+		private dateTimeService: DatetimeService
+	) {
+	}
 
-    ) {
-    }
+	ngOnInit() {
+	}
 
-    ngOnInit() {}
+	initCreateExpense(): void {
+		const expense = this.addExpenseForm.value;
+		this.dateTimeService.getSelectedDate()
+			.then((date: Date) => {
+				if (!expense.createdOn) {
+					expense.createdOn = date
+				}
+			}).then(() => {
+			this.actionService.createExpense(expense).then(() => {
+				console.log('Expense Was Created');
+				this.dismissModal();
+			}).catch((err) => console.log(err));
+		})
+	}
 
-    initCreateExpense(): void {
-      const expense = this.addExpenseForm.value;
-      expense.createdOn = this.dateTimeService.selectedDate;
-      if(!expense.createdOn) {
-          expense.createdOn = this.dateTimeService.getCurrentDateTime();
-      }
-      this.actionService.createExpense(expense).then(() => {
-        console.log('Expense Was Created');
-        this.dismissModal();
-      }).catch((err) => console.log(err));
-    }
-
-    dismissModal(): void {
-        this.modalController.dismiss().then().catch();
-    }
+	dismissModal(): void {
+		this.modalController.dismiss().then().catch();
+	}
 }
