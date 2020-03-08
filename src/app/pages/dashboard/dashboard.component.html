@@ -7,17 +7,28 @@
 <ion-content>
     <ion-card>
         <ion-card-header color="primary">
-            <ion-title class="ion-text-center">
+            <ion-card-title>
                 Total: 500$
-            </ion-title>
+            </ion-card-title>
+            <ion-card-subtitle>
+                {{selectedDate | date}}
+            </ion-card-subtitle>
         </ion-card-header>
         <ion-footer>
             <ion-row>
                 <ion-col size="3">
-                    <ion-button expand="full" fill="clear">Today</ion-button>
+                    <ion-button expand="full" fill="clear" (click)="setCurrentToTodayDate()" >Today</ion-button>
                 </ion-col>
                 <ion-col size="3">
-                    <ion-button expand="full" fill="clear">Date</ion-button>
+                    <ion-item lines="none">
+                        <ion-button color="primary">Date</ion-button>
+                        <ion-datetime
+                                #selected
+                                (ionChange)="changeSelectedDate(selected.value)"
+                                min="2020"
+                                [max]="todayDate.toISOString()"
+                        ></ion-datetime>
+                    </ion-item>
                 </ion-col>
                 <ion-col size="3">
                     <ion-button expand="full" fill="clear">Catagory</ion-button>
@@ -44,16 +55,16 @@
             <ion-text>
                 {{expense.description}}
             </ion-text>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col size="6" class="ion-text-center">
-                            {{expense.createdOn | date}}
-                        </ion-col>
-                        <ion-col size="6">
-                            {{expense.type}}
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="6" class="ion-text-center">
+                        {{expense.createdOn | date}}
+                    </ion-col>
+                    <ion-col size="6">
+                        {{expense.type}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-content>
     </ion-card>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

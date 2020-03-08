@@ -7,6 +7,7 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
 })
 export class DataService {
 
+
     private readonly _expense: BehaviorSubject<ExpenseInterface>;
 
     constructor() {
@@ -25,5 +26,4 @@ export class DataService {
     getExpensesSubscription(): BehaviorSubject<ExpenseInterface> {
         return this._expense;
     }
-
 }
