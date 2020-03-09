@@ -5,6 +5,7 @@ import {ActionService} from '../../../services/action/action.service';
 import {ExpenseInterface} from '../../../interface/expenseInterface';
 import {DatetimeService} from '../../../services/datetime/datetime.service';
 import {error} from 'util';
+import {ExpenseTypes} from "../../../constants/constants";
 
 @Component({
 	selector: 'app-add-expense',
@@ -15,6 +16,7 @@ export class AddExpenseComponent implements OnInit {
 
 
 	expenseForm: ExpenseInterface;
+	expenseTypes: any;
 
 
 	addExpenseForm = new FormGroup({
@@ -28,6 +30,7 @@ export class AddExpenseComponent implements OnInit {
 		private actionService: ActionService,
 		private dateTimeService: DatetimeService
 	) {
+		this.expenseTypes = ExpenseTypes;
 	}
 
 	ngOnInit() {

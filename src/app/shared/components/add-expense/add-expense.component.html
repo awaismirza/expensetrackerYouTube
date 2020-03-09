@@ -20,31 +20,7 @@
         <ion-item>
             <ion-label>Select Type</ion-label>
             <ion-select value="" okText="Ok" cancelText="Cancel" interface="popover" formControlName="type">
-                <ion-select-option value="Games">Games</ion-select-option>
-                <ion-select-option value="Movies">Movies</ion-select-option>
-                <ion-select-option value="Sports">Sports</ion-select-option>
-                <ion-select-option value="Dining Out">Dining Out</ion-select-option>
-                <ion-select-option value="Groceries">Groceries</ion-select-option>
-                <ion-select-option value="Electronics">Electronics</ion-select-option>
-                <ion-select-option value="Furniture">Furniture</ion-select-option>
-                <ion-select-option value="Maintenance">Maintenance</ion-select-option>
-                <ion-select-option value="Mortgage">Mortgage</ion-select-option>
-                <ion-select-option value="Pets">Pets</ion-select-option>
-                <ion-select-option value="Rent">Rent</ion-select-option>
-                <ion-select-option value="Services">Services</ion-select-option>
-                <ion-select-option value="Clothing">Clothing</ion-select-option>
-                <ion-select-option value="Gifts">Gifts</ion-select-option>
-                <ion-select-option value="Insurance">Insurance</ion-select-option>
-                <ion-select-option value="Medical">Medical</ion-select-option>
-                <ion-select-option value="Taxes">Taxes</ion-select-option>
-                <ion-select-option value="General">General</ion-select-option>
-                <ion-select-option value="Cleaning">Cleaning</ion-select-option>
-                <ion-select-option value="Electricity">Electricity</ion-select-option>
-                <ion-select-option value="Gas">Gas</ion-select-option>
-                <ion-select-option value="Internet">Internet</ion-select-option>
-                <ion-select-option value="Mobile">Mobile</ion-select-option>
-                <ion-select-option value="Water">Water</ion-select-option>
-                <ion-select-option value="Others">Other</ion-select-option>
+                <ion-select-option [value]="type.value" *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
             </ion-select>
         </ion-item>
         <br>
