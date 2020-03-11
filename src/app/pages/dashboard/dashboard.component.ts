@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ActionSheetController, ModalController} from '@ionic/angular';
 import {AddExpenseComponent} from '../../shared/components/add-expense/add-expense.component';
 import {DataService} from '../../services/data/data.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
@@ -28,20 +28,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	expenseTypes: any;
 	selectedType: string;
 
+	totalSubscription: SubscriptionLike;
+	todayTotal: number;
+
 	constructor(
 		private modalController: ModalController,
 		private dataService: DataService,
 		private actionsService: ActionService,
 		private datetimeService: DatetimeService,
+		private actionSheetController: ActionSheetController,
 	) {
-		this.actionsService.getTodayExpensesFromLocal().then((expenses => this.expenses = expenses));
 		this.installDate = this.datetimeService.installDate;
 		this.todayDate = this.datetimeService.getCurrentDateTime();
 		this.expenseTypes = ExpenseTypes;
 		this.selectedType = ExpenseTypes.All.toString();
+		this.todayTotal = null;
 	}
 
 	ngOnInit() {
+		this.totalSubscription = this.dataService.getTodayTotalSubscription()
+			.subscribe({
+				next: (total: number) => {
+					this.todayTotal = total;
+				},
+				error: (err) => {
+					console.log(err)
+				},
+				complete: () => {
+				}
+			})
+
 		this.dateSubscription = this.datetimeService.getSelectedDateSubscription()
 			.subscribe({
 				next: (date: Date) => {
@@ -98,5 +114,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 	changeSelectedValue(s: string): void {
 		this.selectedType = s;
+	}
+
+	async presentFilterActionSheet() {
+		const actionSheet = await this.actionSheetController.create({
+			header: 'Albums',
+			buttons: [
+				{
+					text: 'Price',
+					icon: 'logo-usd',
+					handler: () => {
+						console.log('Share clicked');
+					}
+				}, {
+					text: 'Recent',
+					icon: 'cellular-outline',
+					handler: () => {
+						console.log('Play clicked');
+					}
+				}, {
+					text: 'Cancel',
+					icon: 'close',
+					role: 'cancel',
+					handler: () => {
+						console.log('Cancel clicked');
+					}
+				}]
+		});
+		await actionSheet.present();
 	}
 }

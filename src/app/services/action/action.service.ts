@@ -15,15 +15,16 @@ export class ActionService {
 		private storageService: StorageService,
 		private dateTimeService: DatetimeService
 	) {
+		this.getTodayExpensesFromLocal();
 	}
 
 	async createExpense(expense: ExpenseInterface): Promise<void> {
 		return await this.storageService.saveExpenseToLocal(expense).then().catch();
 	}
 
-	async getTodayExpensesFromLocal(): Promise<ExpenseInterface[]> {
-		return await this.storageService.getExpensesFromLocal().then((expenses: ExpenseInterface[]) => {
-			return expenses;
+	async getTodayExpensesFromLocal(): Promise<void> {
+		return this.storageService.getExpensesFromLocal().then((expenses: ExpenseInterface[]) => {
+			this.dataService.setExpenses(expenses);
 		});
 	}
 
@@ -32,4 +33,5 @@ export class ActionService {
 			this.dataService.setExpenses(expenses);
 		})
 	}
+
 }

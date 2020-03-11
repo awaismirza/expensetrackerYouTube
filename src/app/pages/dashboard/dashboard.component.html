@@ -3,7 +3,7 @@
         <ion-card no-margin>
             <ion-card-header color="primary">
                 <ion-card-title>
-                    Total: 500$
+                    Total: {{todayTotal}}
                 </ion-card-title>
                 <ion-card-subtitle>
                     {{selectedDate | date}}
@@ -26,7 +26,7 @@
                         ></ion-datetime>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button expand="full" fill="solid" (click)="selectedValue.open()">Catagory</ion-button>
+                        <ion-button expand="full" fill="solid" (click)="selectedValue.open()">Type</ion-button>
                         <ion-item hidden>
                             <ion-select interface="popover" #selectedValue>
                                 <ion-select-option *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
@@ -34,7 +34,7 @@
                         </ion-item>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button expand="full" fill="solid">Filter</ion-button>
+                        <ion-button expand="full" fill="solid" (click)="presentFilterActionSheet()">Filter</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-footer>
@@ -73,7 +73,7 @@
         </ion-card-content>
     </ion-card>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="presentModal()">
+        <ion-fab-button (click)="presentModal()" color="success">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
