@@ -3,7 +3,7 @@
         <ion-card no-margin>
             <ion-card-header color="primary">
                 <ion-card-title>
-                    Total {{todayTotal}}$
+                    Total {{todayTotal | currency: 'USD'}}
                 </ion-card-title>
                 <ion-card-subtitle>
                     {{selectedDate | date}}

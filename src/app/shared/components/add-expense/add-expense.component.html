@@ -9,17 +9,20 @@
 
 <ion-content>
     <form [formGroup]="addExpenseForm">
+        <ion-label color="danger" position="floating" *ngIf="addExpenseForm.controls.amount.invalid && addExpenseForm.controls.amount.touched">
+            Amount is Not Valid
+        </ion-label>
+        <ion-item>
+            <ion-input type="number" placeholder="Amount" inputmode="decimal" formControlName="amount" required></ion-input>
+        </ion-item>
 
         <ion-item>
-            <ion-input placeholder="Type Amount" type="number" formControlName="amount"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-textarea placeholder="Type Description" type="text" formControlName="description"></ion-textarea>
+            <ion-textarea placeholder="Description" type="text" formControlName="description"></ion-textarea>
         </ion-item>
 
         <ion-item>
             <ion-label>Select Type</ion-label>
-            <ion-select value="" okText="Ok" cancelText="Cancel" interface="popover" formControlName="type">
+            <ion-select value="" okText="Ok" cancelText="Cancel" interface="popover" formControlName="type" required>
                 <ion-select-option [value]="type.value" *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
             </ion-select>
         </ion-item>
