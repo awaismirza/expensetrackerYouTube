@@ -3,7 +3,7 @@
         <ion-card no-margin>
             <ion-card-header color="primary">
                 <ion-card-title>
-                    Total: {{todayTotal}}
+                    Total {{todayTotal}}$
                 </ion-card-title>
                 <ion-card-subtitle>
                     {{selectedDate | date}}
@@ -34,7 +34,10 @@
                         </ion-item>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button expand="full" fill="solid" (click)="presentFilterActionSheet()">Filter</ion-button>
+                        <ion-button expand="full" fill="solid" (click)="priceFilter()">
+                            <ion-icon name="logo-usd"></ion-icon>
+                            <ion-icon *ngIf="filterByPrice" [name]="filterByPriceUp ? 'arrow-up' : 'arrow-down'"></ion-icon>
+                        </ion-button>
                     </ion-col>
                 </ion-row>
             </ion-footer>

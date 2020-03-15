@@ -7,7 +7,6 @@ import {SubscriptionLike} from 'rxjs';
 import {ActionService} from '../../services/action/action.service';
 import {DatetimeService} from "../../services/datetime/datetime.service";
 import {ExpenseTypes} from "../../constants/constants";
-import {forEach} from "@angular-devkit/schematics";
 
 @Component({
 	selector: 'app-dashboard',
@@ -30,6 +29,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 	totalSubscription: SubscriptionLike;
 	todayTotal: number;
+
+	filterByPrice: boolean;
+	filterByPriceUp: boolean;
+
 
 	constructor(
 		private modalController: ModalController,
@@ -116,6 +119,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		this.selectedType = s;
 	}
 
+	priceFilter(): void {
+		this.expenses = this.expenses.sort((a, b) => {
+			if (a.amount > b.amount) return this.filterByPriceUp ? 1 : -1;
+			if (b.amount > a.amount) return this.filterByPriceUp ? -1 : 1;
+			return 0
+		})
+		this.filterByPrice = true;
+		this.filterByPriceUp = !this.filterByPriceUp;
+	}
+
 	async presentFilterActionSheet() {
 		const actionSheet = await this.actionSheetController.create({
 			header: 'Albums',
@@ -143,4 +156,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		});
 		await actionSheet.present();
 	}
+
 }
