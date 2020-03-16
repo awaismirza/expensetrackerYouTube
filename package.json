@@ -13,7 +13,7 @@
     "test:headless": "ng test --browsers=ChromeHeadlessCI",
     "sync:ios": "ionic capacitor sync ios",
     "sync:android": "ionic capacitor sync android",
-    "run:ios": onic capacitor run ios",
+    "run:ios": "ionic capacitor run ios",
     "run:android": "ionic capacitor run android",
     "live:ios": "ionic capacitor run ios --livereload --external",
     "live:android": "ionic capacitor run android --livereload --external"
