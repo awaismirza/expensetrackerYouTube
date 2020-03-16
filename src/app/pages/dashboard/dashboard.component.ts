@@ -4,9 +4,9 @@ import {AddExpenseComponent} from '../../shared/components/add-expense/add-expen
 import {DataService} from '../../services/data/data.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 import {SubscriptionLike} from 'rxjs';
-import {ActionService} from '../../services/action/action.service';
 import {DatetimeService} from "../../services/datetime/datetime.service";
 import {ExpenseTypes} from "../../constants/constants";
+import {ExpenseService} from "../../services/storage/expense.service";
 
 @Component({
 	selector: 'app-dashboard',
@@ -37,9 +37,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	constructor(
 		private modalController: ModalController,
 		private dataService: DataService,
-		private actionsService: ActionService,
 		private datetimeService: DatetimeService,
 		private actionSheetController: ActionSheetController,
+		private expenseService: ExpenseService,
 	) {
 		this.installDate = this.datetimeService.installDate;
 		this.todayDate = this.datetimeService.getCurrentDateTime();
@@ -104,14 +104,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	changeSelectedDate(value: string): void {
 		this.selectedDate = this.datetimeService.createDateFromString(value);
 		this.datetimeService.setSelectedDate(value).then(() => {
-			this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
+			this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
 		})
 
 	}
 
 	setCurrentToTodayDate(): void {
 		this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime()).then(() => {
-			this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
+			this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
 		})
 	}
 

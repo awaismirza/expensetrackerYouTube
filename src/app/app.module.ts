@@ -10,7 +10,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DataService} from './services/data/data.service';
-import {ActionService} from './services/action/action.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,7 +25,6 @@ import {ActionService} from './services/action/action.service';
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         DataService,
-        ActionService
     ],
     bootstrap: [AppComponent]
 })
