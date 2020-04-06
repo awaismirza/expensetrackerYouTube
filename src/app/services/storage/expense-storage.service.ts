@@ -7,7 +7,7 @@ import {DataService} from "../data/data.service";
 @Injectable({
 	providedIn: 'root'
 })
-export class ExpenseService {
+export class ExpenseStorageService {
 
 	constructor(
 		private datetimeService: DatetimeService,

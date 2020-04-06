@@ -6,7 +6,7 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
 import {SubscriptionLike} from 'rxjs';
 import {DatetimeService} from "../../services/datetime/datetime.service";
 import {ExpenseTypes} from "../../constants/constants";
-import {ExpenseService} from "../../services/storage/expense.service";
+import {ExpenseStorageService} from "../../services/storage/expense-storage.service";
 
 @Component({
 	selector: 'app-dashboard',
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		private dataService: DataService,
 		private datetimeService: DatetimeService,
 		private actionSheetController: ActionSheetController,
-		private expenseService: ExpenseService,
+		private expenseService: ExpenseStorageService,
 	) {
 		this.installDate = this.datetimeService.installDate;
 		this.todayDate = this.datetimeService.getCurrentDateTime();

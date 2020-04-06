@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExpenseInterface} from '../../../interface/expenseInterface';
 import {DatetimeService} from '../../../services/datetime/datetime.service';
-import {error} from 'util';
 import {ExpenseTypes} from "../../../constants/constants";
-import {ExpenseService} from "../../../services/storage/expense.service";
+import {ExpenseStorageService} from "../../../services/storage/expense-storage.service";
 
 @Component({
 	selector: 'app-add-expense',
@@ -28,7 +27,7 @@ export class AddExpenseComponent implements OnInit {
 	constructor(
 		private modalController: ModalController,
 		private dateTimeService: DatetimeService,
-		private expenseService: ExpenseService,
+		private expenseService: ExpenseStorageService,
 
 	) {
 		this.expenseTypes = ExpenseTypes;
