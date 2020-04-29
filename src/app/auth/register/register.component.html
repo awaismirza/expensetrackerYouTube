@@ -28,7 +28,7 @@
                 <ion-button expand="block" type="submit" [disabled]="!registerForm.valid"> Register</ion-button>
             </form>
             <ion-item class="ion-text-end" lines="none">
-                <ion-label (click)="navigateToLogin()">Login</ion-label>
+                <ion-label [routerLink]="['/auth/login']">Login</ion-label>
             </ion-item>
         </ion-card-content>
     </ion-card>

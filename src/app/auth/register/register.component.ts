@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -7,7 +6,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   private registerForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -16,17 +15,10 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl('', [Validators.min(8), Validators.required])
   });
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   doRegister(): void {
     console.log('Registering User');
-  }
-
-  ngOnInit() {
-  }
-
-  navigateToLogin(): void {
-    this.router.navigateByUrl('auth/login');
   }
 }
