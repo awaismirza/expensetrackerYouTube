@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {RegisterRoutingModule} from './register-routing.module';
 import {RegisterComponent} from './register.component';
 import {IonicModule} from '@ionic/angular';
+import {AppFormsModule} from '../../core/modules/app-forms.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {IonicModule} from '@ionic/angular';
     imports: [
         CommonModule,
         IonicModule,
-        RegisterRoutingModule
+        RegisterRoutingModule,
+        AppFormsModule
     ]
 })
 export class RegisterModule {
