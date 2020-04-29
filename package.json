@@ -1,15 +1,14 @@
 {
   "name": "expenselogger",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Awais Mirza",
+  "homepage": "https://awaisjamil.com/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
+    "lint": "ng lint", "e2e": "ng e2e",
     "test:headless": "ng test --browsers=ChromeHeadlessCI",
     "sync:ios": "ionic capacitor sync ios",
     "sync:android": "ionic capacitor sync android",

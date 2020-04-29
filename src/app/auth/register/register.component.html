@@ -1,0 +1,33 @@
+<ion-header>
+    <!--    <ion-toolbar>-->
+    <!--        <ion-title>login</ion-title>-->
+    <!--    </ion-toolbar>-->
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title class="ion-text-center">Register</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item-group>
+                <ion-item lines="full">
+                    <ion-input placeholder="Name"></ion-input>
+                </ion-item>
+                <ion-item lines="full">
+                    <ion-input placeholder="Email"></ion-input>
+                </ion-item>
+                <ion-item lines="full">
+                    <ion-input placeholder="Password"></ion-input>
+                </ion-item>
+                <ion-item lines="full">
+                    <ion-input placeholder="Confirm Password"></ion-input>
+                </ion-item>
+            </ion-item-group>
+            <ion-button expand="block"> Register</ion-button>
+            <ion-item class="ion-text-end" lines="none">
+                <ion-label (click)="navigateToLogin()">Login</ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
