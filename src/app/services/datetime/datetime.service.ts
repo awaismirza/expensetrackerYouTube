@@ -8,11 +8,20 @@ import {BehaviorSubject} from "rxjs";
 export class DatetimeService {
 
 
-	private _installDate: Date;
-	private _selectedDate: BehaviorSubject<Date>;
+	private readonly _selectedDate: BehaviorSubject<Date>;
 
 	constructor() {
-		this._selectedDate = new BehaviorSubject<Date>(this.getCurrentDateTime());
+		this._selectedDate = new BehaviorSubject<Date>(moment().toDate());
+	}
+
+	private _installDate: Date;
+
+	get installDate(): Date {
+		return this._installDate;
+	}
+
+	set installDate(value: Date) {
+		this._installDate = value;
 	}
 
 	async setSelectedDate(date: Date | string): Promise<void> {
@@ -37,15 +46,6 @@ export class DatetimeService {
 
 	getDateTimeISOWithFormat(date?: Date): string {
 		return date ? moment(date).format('L') : moment().format('L');
-	}
-
-
-	get installDate(): Date {
-		return this._installDate;
-	}
-
-	set installDate(value: Date) {
-		this._installDate = value;
 	}
 
 }

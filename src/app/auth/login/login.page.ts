@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth/auth.service';
+import {AnimationController} from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
 	});
 
 	constructor(
-		private authService: AuthService
+		private authService: AuthService,
+		private animationCtrl: AnimationController
 	) {
 	}
 
@@ -27,14 +29,24 @@ export class LoginPage implements OnInit {
 			.subscribe({
 				next: (res) => console.log(res),
 				error: (err) => console.error(err)
-		})
+			})
 	}
 
 	togglePasswordFieldType(): void {
 		this.showPassword = !this.showPassword;
 	}
 
-	ngOnInit(): void {
+	ngOnInit(): void {s
 		console.log(this.authService);
+		// this.transformAnimation()
+	}
+
+	transformAnimation(e: any): void {
+		this.animationCtrl.create()
+			.addElement(e)
+			.duration(1500)
+			.iterations(Infinity)
+			.fromTo('transform', 'translateX(0px)', 'translateX(100px)')
+			.fromTo('opacity', '1', '0.2');
 	}
 }

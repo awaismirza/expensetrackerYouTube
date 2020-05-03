@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "expenselogger",
+  "appId": "com.awaismirza.expensetracker",
+  "appName": "expense tracker",
   "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "www",
