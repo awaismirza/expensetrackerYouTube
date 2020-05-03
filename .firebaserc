@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "expencetracker-99819": {
+      "hosting": {
+        "app": [
+          "expencetracker-99819"
+        ]
+      }
+    }
+  }
+}
