@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card class="ion-no-margin">
         <ion-card-header>
             <ion-card-title class="ion-text-center">Login</ion-card-title>
         </ion-card-header>
@@ -15,16 +15,18 @@
                     <ion-item lines="full">
                         <ion-input placeholder="Email" formControlName="email"></ion-input>
                     </ion-item>
-                    <ion-item lines="full">
-                        <ion-input placeholder="Password" formControlName="password"></ion-input>
+                    <ion-item lines="full" class="ion-padding-bottom">
+                        <ion-input placeholder="Password" formControlName="password"
+                                   [type]="showPassword ? 'text': 'password'"></ion-input>
+                        <ion-icon [name]="showPassword ? 'eye-off': 'eye'" size="large"
+                                  (click)="togglePasswordFieldType()"></ion-icon>
                     </ion-item>
+                    <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
+                    <ion-button fill="outline" [routerLink]="['/auth/forgot-password']" color="warning">Forgot Password
+                    </ion-button>
+                    <ion-button fill="outline" [routerLink]="['/auth/register']" color="success">Register</ion-button>
                 </ion-item-group>
-                <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
             </form>
-            <ion-item class="ion-text-end" lines="none">
-                <ion-label [routerLink]="['/auth/forgot-password']" color="primary">Forgot Password</ion-label>
-                <ion-label [routerLink]="['/auth/register']" color="primary">Register</ion-label>
-            </ion-item>
         </ion-card-content>
     </ion-card>
 </ion-content>

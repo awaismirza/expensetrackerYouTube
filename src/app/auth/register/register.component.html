@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card #loginCard>
         <ion-card-header>
             <ion-card-title class="ion-text-center">Register</ion-card-title>
         </ion-card-header>
@@ -13,7 +13,8 @@
             <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
                 <ion-item-group>
                     <ion-item lines="full">
-                        <ion-input placeholder="Name" formControlName="name"></ion-input>
+                        <ion-input placeholder="Name" formControlName="name"
+                                   (ionBlur)="checkFieldValidity('name')"></ion-input>
                     </ion-item>
                     <ion-item lines="full">
                         <ion-input placeholder="Email" formControlName="email"></ion-input>
@@ -22,14 +23,15 @@
                         <ion-input placeholder="Password" formControlName="password"></ion-input>
                     </ion-item>
                     <ion-item lines="full">
-                        <ion-input placeholder="Confirm Password" formControlName="confirmPassword"></ion-input>
+                        <ion-input placeholder="Confirm Password"
+                                   formControlName="confirmPassword"></ion-input>
                     </ion-item>
+                    <ion-button expand="block" type="submit" [disabled]="!registerForm.valid"> Register
+                    </ion-button>
+                    <ion-button fill="outline" color="success" [routerLink]="['/auth/login']">Login
+                    </ion-button>
                 </ion-item-group>
-                <ion-button expand="block" type="submit" [disabled]="!registerForm.valid"> Register</ion-button>
             </form>
-            <ion-item class="ion-text-end" lines="none">
-                <ion-label [routerLink]="['/auth/login']">Login</ion-label>
-            </ion-item>
         </ion-card-content>
     </ion-card>
 </ion-content>

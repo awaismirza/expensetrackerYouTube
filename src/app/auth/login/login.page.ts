@@ -1,36 +1,40 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AngularFireAuth} from '@angular/fire/auth';
+import {AuthService} from '../services/auth/auth.service';
 
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.page.html',
-    styleUrls: ['./login.page.scss'],
+	selector: 'app-login',
+	templateUrl: './login.page.html',
+	styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
 
-    private loginForm: FormGroup = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.min(8)])
-    });
+	private showPassword: boolean = false;
 
-    constructor(
-        private fireAuth: AngularFireAuth
-    ) {}
+	private loginForm: FormGroup = new FormGroup({
+		email: new FormControl('', [Validators.required, Validators.email]),
+		password: new FormControl('', [Validators.required, Validators.min(8)])
+	});
 
-    doLogin(): void {
-        console.log(this.loginForm.value);
-        const loginFormValues = this.loginForm.value;
-        this.fireAuth.auth.signInWithEmailAndPassword(
-            loginFormValues.email,
-            loginFormValues.password
-        ).then((res) => {
-            console.log(res);
-        })
-    }
+	constructor(
+		private authService: AuthService
+	) {
+	}
 
-    ngOnInit(): void {
-        console.log(this.fireAuth.auth.currentUser)
-    }
+	doLogin(): void {
+		this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
+			.subscribe({
+				next: (res) => console.log(res),
+				error: (err) => console.error(err)
+		})
+	}
+
+	togglePasswordFieldType(): void {
+		this.showPassword = !this.showPassword;
+	}
+
+	ngOnInit(): void {
+		console.log(this.authService);
+	}
 }

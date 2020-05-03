@@ -10,7 +10,7 @@ import {AppFormsModule} from '../../core/modules/app-forms.module';
         CommonModule,
         IonicModule,
         LoginPageRoutingModule,
-        AppFormsModule
+        AppFormsModule,
     ],
     declarations: [LoginPage]
 })
