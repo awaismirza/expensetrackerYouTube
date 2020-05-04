@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
 		this.showPassword = !this.showPassword;
 	}
 
-	ngOnInit(): void {s
+	ngOnInit(): void {
 		console.log(this.authService);
 		// this.transformAnimation()
 	}
