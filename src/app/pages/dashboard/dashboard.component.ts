@@ -103,16 +103,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 	changeSelectedDate(value: string): void {
 		this.selectedDate = this.datetimeService.createDateFromString(value);
-		this.datetimeService.setSelectedDate(value).then(() => {
-			this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
-		})
+		this.datetimeService.setSelectedDate(value)
+		// then(() => {
+		// 	this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
+		// })
 
 	}
 
 	setCurrentToTodayDate(): void {
-		this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime()).then(() => {
-			this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
-		})
+		this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime())
+			// .then(() => {
+			// this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
+		// })
 	}
 
 	changeSelectedValue(s: string): void {

@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth/auth.service';
 import {AnimationController} from '@ionic/angular';
+import {KeyboardResize, Plugins} from '@capacitor/core';
 
+const keyboard = Plugins.Keyboard;
 
 @Component({
 	selector: 'app-login',
@@ -11,8 +13,11 @@ import {AnimationController} from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-	private showPassword: boolean = false;
+	@ViewChild('loginFormCard', {static: true}) loginCard: HTMLElement;
 
+	private loginCardAnimation: any;
+
+	private showPassword: boolean = false;
 	private loginForm: FormGroup = new FormGroup({
 		email: new FormControl('', [Validators.required, Validators.email]),
 		password: new FormControl('', [Validators.required, Validators.min(8)])
@@ -20,8 +25,14 @@ export class LoginPage implements OnInit {
 
 	constructor(
 		private authService: AuthService,
-		private animationCtrl: AnimationController
+		private animationCtrl: AnimationController,
 	) {
+		Plugins.Keyboard.setResizeMode({mode: KeyboardResize.None});
+		Plugins.Keyboard.addListener('keyboardWillHide', () => {
+			this.performAnimation(false);
+		})
+
+		Plugins.Keyboard.removeAllListeners()
 	}
 
 	doLogin(): void {
@@ -37,16 +48,21 @@ export class LoginPage implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.authService);
-		// this.transformAnimation()
 	}
 
-	transformAnimation(e: any): void {
-		this.animationCtrl.create()
-			.addElement(e)
-			.duration(1500)
-			.iterations(Infinity)
-			.fromTo('transform', 'translateX(0px)', 'translateX(100px)')
-			.fromTo('opacity', '1', '0.2');
+	performAnimation(up: boolean): void {
+		if (up === true) {
+			this.loginCardAnimation = this.animationCtrl.create()
+				.addElement(document.querySelector('#loginFormCard'))
+				.duration(200)
+				.fromTo('transform', 'translateY(0px)', 'translateY(-150px)').play()
+		} else {
+			this.loginCardAnimation = this.animationCtrl.create()
+				.addElement(document.querySelector('#loginFormCard'))
+				.duration(200)
+				.fromTo('transform', 'translateY(0px)', 'translateY(150px)').play()
+		}
+
+
 	}
 }

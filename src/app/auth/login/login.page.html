@@ -6,7 +6,7 @@
 
 <ion-content>
     <ion-grid>
-        <ion-row class="ion-justify-content-center expandHeight">
+        <ion-row class="ion-justify-content-center expandHeight"    >
             <ion-col size="10" class="ion-align-self-center">
                 <ion-card #loginFormCard id="loginFormCard">
                     <ion-card-header>
@@ -16,7 +16,7 @@
                         <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
                             <ion-item-group>
                                 <ion-item lines="full">
-                                    <ion-input placeholder="Email" formControlName="email" (ionFocus)="transformAnimation(loginFormCard)"></ion-input>
+                                    <ion-input placeholder="Email" formControlName="email" (ionFocus)="this.performAnimation(true)"></ion-input>
                                 </ion-item>
                                 <ion-item lines="full" class="ion-padding-bottom">
                                     <ion-input placeholder="Password" formControlName="password"

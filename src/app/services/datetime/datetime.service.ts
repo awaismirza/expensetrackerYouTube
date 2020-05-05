@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
-import {BehaviorSubject} from "rxjs";
+import * as moment from 'moment/moment';
+import {BehaviorSubject, Observable, of} from "rxjs";
+import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,7 +12,7 @@ export class DatetimeService {
 	private readonly _selectedDate: BehaviorSubject<Date>;
 
 	constructor() {
-		this._selectedDate = new BehaviorSubject<Date>(moment().toDate());
+		// this._selectedDate = new BehaviorSubject<Date>(moment().toDate());
 	}
 
 	private _installDate: Date;
@@ -24,8 +25,8 @@ export class DatetimeService {
 		this._installDate = value;
 	}
 
-	async setSelectedDate(date: Date | string): Promise<void> {
-		return this._selectedDate.next(typeof date === "string" ? this.createDateFromString(date) : date);
+	setSelectedDate(date: Date | string): Observable<void> {
+		return of(this._selectedDate.next(typeof date === "string" ? this.createDateFromString(date) : date));
 	}
 
 	async getSelectedDate(): Promise<Date> {
@@ -37,7 +38,7 @@ export class DatetimeService {
 	}
 
 	getCurrentDateTime(): Date {
-		return moment().toDate();
+		return moment().toDate()
 	}
 
 	createDateFromString(date: string): Date {
