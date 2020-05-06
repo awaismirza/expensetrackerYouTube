@@ -8,36 +8,36 @@ import {LodashService} from '../../../services/lodash/lodash.service';
 @Injectable()
 export class AuthService {
 
-	constructor(
-		private fireAuth: AngularFireAuth,
-		private _: LodashService,
-	) {
-	}
+    constructor(
+        private fireAuth: AngularFireAuth,
+        private _: LodashService,
+    ) {
+    }
 
-	// loginWithEmailAndPassword
-	loginWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential | void> {
-		if (!this._.isNull(email) && !this._.isNull(password)) {
-			return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password))
-		} else {
-			return throwError('Email Or Password is Null')
-		}
-	}
+    // loginWithEmailAndPassword
+    loginWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential | void> {
+        if (!this._.isNull(email) && !this._.isNull(password)) {
+            return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password))
+        } else {
+            return throwError('Email Or Password is Null')
+        }
+    }
 
 
-	// RegisterWithEmailAndPassword
-	registerWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential> {
-		if (!this._.isNull(email) && !this._.isNull(password)) {
-			return fromPromise(this.fireAuth.auth.createUserWithEmailAndPassword(email, password));
-		} else {
-			throwError('Pass Correct Email and Password')
-		}
-	}
+    // RegisterWithEmailAndPassword
+    registerWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential> {
+        if (!this._.isNull(email) && !this._.isNull(password)) {
+            return fromPromise(this.fireAuth.auth.createUserWithEmailAndPassword(email, password));
+        } else {
+            throwError('Pass Correct Email and Password')
+        }
+    }
 
-	// Logout
-	logout(): Observable<void> {
-		return fromPromise(this.fireAuth.auth.signOut());
-	}
+    // Logout
+    logout(): Observable<void> {
+        return fromPromise(this.fireAuth.auth.signOut());
+    }
 
-	//LoginWithGoogle
+    //LoginWithGoogle
 
 }

@@ -1,24 +1,27 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {AuthRoutingModule} from './auth-routing.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthService} from './services/auth/auth.service';
+import {AuthComponent} from './auth.component';
+import {IonicModule} from '@ionic/angular';
+import {RegisterComponent} from './register/register.component';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [AuthComponent],
     imports: [
         CommonModule,
         AuthRoutingModule,
         ReactiveFormsModule,
-        AngularFireAuthModule
+        IonicModule,
+        AngularFireAuthModule,
     ],
     providers: [
+        AngularFireAuth,
         AuthService
     ],
-
 })
 export class AuthModule {
 }
