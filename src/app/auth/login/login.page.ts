@@ -3,8 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth/auth.service';
 import {KeyboardResize, Plugins} from '@capacitor/core';
 
-const keyboard = Plugins.Keyboard;
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
@@ -16,7 +14,7 @@ export class LoginPage implements OnInit {
 
     private loginCardAnimation: any;
 
-    private showPassword = false;
+    showPassword = false;
 
     private loginForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -26,14 +24,15 @@ export class LoginPage implements OnInit {
     constructor(
         private authService: AuthService,
     ) {
-        Plugins.Keyboard.setResizeMode({mode: KeyboardResize.None});
-        Plugins.Keyboard.addListener('keyboardWillShow', () => {
-            // this.performAnimation(true);
+        Plugins.Device.getInfo().then((deviceInfo) => {
+            if (deviceInfo.platform !== 'web') {
+                Plugins.Keyboard.setResizeMode({mode: KeyboardResize.None});
+                Plugins.Keyboard.addListener('keyboardWillShow', () => {
+                    console.log('Keyboard Event');
+                });
+            }
         });
 
-        // Plugins.Keyboard.addListener('keyboardDidHide', () => {
-        //     this.performAnimation(false);
-        // });
     }
 
     doLogin(): void {
@@ -54,20 +53,4 @@ export class LoginPage implements OnInit {
 
     ngOnInit(): void {
     }
-
-    // private performAnimation(up: boolean): void {
-    //     if (up === true) {
-    //         this.loginCardAnimation = this.animationCtrl.create()
-    //             .addElement(document.querySelector('#loginFormCard'))
-    //             .duration(500)
-    //             .fromTo('transform', 'translateY(0px)', 'translateY(-60px)').play();
-    //     } else {
-    //         this.loginCardAnimation = this.animationCtrl.create()
-    //             .addElement(document.querySelector('#loginFormCard'))
-    //             .duration(500)
-    //             .fromTo('transform', 'translateY(-60px)', 'translateY(60px)').play();
-    //     }
-    //
-    //
-    // }
 }

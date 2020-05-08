@@ -1,16 +1,14 @@
 <ion-header>
-    <!--    <ion-toolbar>-->
-    <!--        <ion-title>login</ion-title>-->
-    <!--    </ion-toolbar>-->
+
 </ion-header>
 
 <ion-content>
-    <ion-grid>
+    <ion-grid class="ion-no-margin">
         <ion-row class="ion-justify-content-center expandHeight">
-            <ion-col size="10" class="ion-align-self-center">
+            <ion-col size="12" class="ion-align-self-center">
                 <ion-card #loginFormCard id="loginFormCard">
                     <ion-card-header>
-                        <ion-card-title class="ion-text-center">Login</ion-card-title>
+                        <ion-card-title class="ion-text-center">Expense Tracker</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                         <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
@@ -24,10 +22,15 @@
                                     <ion-icon [name]="showPassword ? 'eye-off': 'eye'" size="large"
                                               (click)="togglePasswordFieldType()"></ion-icon>
                                 </ion-item>
-                                <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
-                                <ion-button fill="outline" [routerLink]="['/auth/forgot-password']" color="warning">Forgot Password
+                                <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Login
                                 </ion-button>
-                                <ion-button fill="outline" [routerLink]="['/auth/register']" color="success">Register</ion-button>
+                                <ion-button fill="outline" size="small" [routerLink]="['/auth/forgot-password']"
+                                            color="warning">Forgot Password
+                                </ion-button>
+                                <ion-button fill="outline" size="small" [routerLink]="['/auth/register']"
+                                            color="success">
+                                    Register
+                                </ion-button>
                             </ion-item-group>
                         </form>
                     </ion-card-content>

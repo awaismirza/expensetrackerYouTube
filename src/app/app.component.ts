@@ -24,8 +24,13 @@ export class AppComponent {
 
     async initializeApp(): Promise<void> {
         return await this.platform.ready().then(() => {
-            Plugins.SplashScreen.hide();
-            Plugins.StatusBar.show();
+            Plugins.Device.getInfo().then((deviceInfo) => {
+                if (deviceInfo.platform !== 'web') {
+                    Plugins.SplashScreen.hide();
+                    Plugins.StatusBar.show();
+                }
+
+            });
         });
     }
 

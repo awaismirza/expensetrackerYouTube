@@ -17,9 +17,9 @@ export class AuthService {
     // loginWithEmailAndPassword
     loginWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential | void> {
         if (!this._.isNull(email) && !this._.isNull(password)) {
-            return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password))
+            return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password));
         } else {
-            return throwError('Email Or Password is Null')
+            return throwError('Email Or Password is Null');
         }
     }
 
@@ -29,7 +29,7 @@ export class AuthService {
         if (!this._.isNull(email) && !this._.isNull(password)) {
             return fromPromise(this.fireAuth.auth.createUserWithEmailAndPassword(email, password));
         } else {
-            throwError('Pass Correct Email and Password')
+            throwError('Pass Correct Email and Password');
         }
     }
 
