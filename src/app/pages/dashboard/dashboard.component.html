@@ -3,7 +3,7 @@
         <ion-card no-margin>
             <ion-card-header color="primary">
                 <ion-card-title>
-                    Test {{todayTotal | currency: 'USD'}}
+                    Total {{todayTotal | currency: 'USD'}}
                 </ion-card-title>
                 <ion-card-subtitle>
                     {{selectedDate | date}}
@@ -15,8 +15,7 @@
                         <ion-button expand="full" fill="solid" (click)="setCurrentToTodayDate()">Today</ion-button>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button color="primary" expand="full" fill="solid" (click)="selected.open()">Date
-                        </ion-button>
+                        <ion-button color="primary" expand="full" fill="solid" (click)="selected.open()">Date</ion-button>
                         <ion-datetime hidden
                                       #selected
                                       [value]="selectedDate.toISOString()"

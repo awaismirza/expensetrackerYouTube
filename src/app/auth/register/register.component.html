@@ -28,10 +28,8 @@
                                               (click)="togglePasswordFieldType()"></ion-icon>
                                 </ion-item>
                                 <ion-item lines="full">
-                                     <ion-input placeholder="Confirm Password" formControlName="password"
+                                     <ion-input placeholder="Confirm Password" formControlName="passwordConfirm"
                                                [type]="showPassword ? 'text': 'password'"></ion-input>
-                                    <ion-icon [name]="showPassword ? 'eye-off': 'eye'" size="large"
-                                              (click)="togglePasswordFieldType()"></ion-icon>
                                 </ion-item>
                                 <ion-button expand="block" type="submit" [disabled]="!registerForm.valid"> Register
                                 </ion-button>

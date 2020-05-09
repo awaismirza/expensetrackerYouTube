@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators, ValidationErrors} from '@angular/forms';
 import {AnimationService} from '../../services/animation/animation.service';
 import {AuthService} from '../services/auth/auth.service';
+import {Router} from '@angular/router';
+import {AppRoutes} from '../../constants/constants';
 
 // Authentication Forms Custom Validators
 export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -47,14 +49,16 @@ export class RegisterComponent implements OnInit {
     constructor(
         private animationService: AnimationService,
         private authService: AuthService,
-    ) {
-    }
+        private router: Router,
+    ) {}
 
     doRegister(): void {
         this.authService.registerWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
             .subscribe({
                 next: (res) => {
-                    console.log(res);
+                    if (res !== null) {
+                        this.router.navigateByUrl(AppRoutes.LOGIN);
+                    }
                 }
             });
     }
@@ -65,6 +69,7 @@ export class RegisterComponent implements OnInit {
     togglePasswordFieldType(): void {
         this.showPassword = !this.showPassword;
     }
+
     checkFieldValidity(control: string): void {
         // const cont = this.registerForm.controls[control]
     }

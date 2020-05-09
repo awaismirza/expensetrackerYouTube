@@ -3,17 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-	production: false,
-	firebase: {
-		apiKey: "AIzaSyA4_gSavmV71_TCDa2_5FmnFnjfndnvmuM",
-		authDomain: "expencetracker-99819.firebaseapp.com",
-		databaseURL: "https://expencetracker-99819.firebaseio.com",
-		projectId: "expencetracker-99819",
-		storageBucket: "expencetracker-99819.appspot.com",
-		messagingSenderId: "760175024638",
-		appId: "1:760175024638:web:bbbc6307542a858c1b88af",
-		measurementId: "G-GKKFKQLFQJ"
-	}
+    production: false,
+    firebase: {
+        apiKey: 'AIzaSyA4_gSavmV71_TCDa2_5FmnFnjfndnvmuM',
+        authDomain: 'expencetracker-99819.firebaseapp.com',
+        databaseURL: 'https://expencetracker-99819.firebaseio.com',
+        projectId: 'expencetracker-99819',
+        storageBucket: 'expencetracker-99819.appspot.com',
+        messagingSenderId: '760175024638',
+        appId: '1:760175024638:web:dc39bf487301674f1b88af',
+        measurementId: 'G-LXG8NSVLDB'
+    }
 };
 
 /*

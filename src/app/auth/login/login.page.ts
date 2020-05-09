@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth/auth.service';
 import {KeyboardResize, Plugins} from '@capacitor/core';
+import {Router} from '@angular/router';
+import {AppRoutes} from '../../constants/constants';
 
 @Component({
     selector: 'app-login',
@@ -17,12 +19,13 @@ export class LoginPage implements OnInit {
     showPassword = false;
 
     private loginForm: FormGroup = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.min(8)])
+        email: new FormControl('test2@gmail.com', [Validators.required, Validators.email]),
+        password: new FormControl('hello123', [Validators.required, Validators.min(8)])
     });
 
     constructor(
         private authService: AuthService,
+        private router: Router,
     ) {
         Plugins.Device.getInfo().then((deviceInfo) => {
             if (deviceInfo.platform !== 'web') {
@@ -39,7 +42,8 @@ export class LoginPage implements OnInit {
         this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
             .subscribe({
                 next: (res) => {
-                    console.log(res);
+                    console.log(res, 'Login Successfull');
+                    this.router.navigateByUrl(AppRoutes.TABS);
                 },
                 error: (err) => {
                     console.error(err);

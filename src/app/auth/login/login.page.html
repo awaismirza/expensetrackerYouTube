@@ -8,7 +8,7 @@
             <ion-col size="12" class="ion-align-self-center">
                 <ion-card #loginFormCard id="loginFormCard">
                     <ion-card-header>
-                        <ion-card-title class="ion-text-center">Expense Tracker</ion-card-title>
+                        <ion-card-title class="ion-text-center">Login</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                         <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
@@ -16,14 +16,16 @@
                                 <ion-item lines="full">
                                     <ion-input placeholder="Email" formControlName="email"></ion-input>
                                 </ion-item>
-                                <ion-item lines="full" class="ion-padding-bottom">
+                                <ion-item lines="full">
                                     <ion-input placeholder="Password" formControlName="password"
                                                [type]="showPassword ? 'text': 'password'"></ion-input>
                                     <ion-icon [name]="showPassword ? 'eye-off': 'eye'" size="large"
                                               (click)="togglePasswordFieldType()"></ion-icon>
                                 </ion-item>
+                                <br>
                                 <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Login
                                 </ion-button>
+                                <br/>
                                 <ion-button fill="outline" size="small" [routerLink]="['/auth/forgot-password']"
                                             color="warning">Forgot Password
                                 </ion-button>
