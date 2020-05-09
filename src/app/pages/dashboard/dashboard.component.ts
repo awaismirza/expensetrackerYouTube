@@ -7,6 +7,8 @@ import {SubscriptionLike} from 'rxjs';
 import {DatetimeService} from '../../services/datetime/datetime.service';
 import {ExpenseTypes} from '../../constants/constants';
 import {ExpenseStorageService} from '../../services/storage/expense-storage.service';
+import UserCredential = firebase.auth.UserCredential;
+import {AuthService} from '../../auth/services/auth/auth.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -33,6 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     filterByPrice: boolean;
     filterByPriceUp: boolean;
 
+    userCreds: UserCredential;
+    userCredsSubscription: SubscriptionLike;
 
     constructor(
         private modalController: ModalController,
@@ -40,6 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private datetimeService: DatetimeService,
         private actionSheetController: ActionSheetController,
         private expenseService: ExpenseStorageService,
+        private authService: AuthService,
     ) {
         this.installDate = this.datetimeService.installDate;
         this.todayDate = this.datetimeService.getCurrentDateTime();
@@ -50,6 +55,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        console.log(this.authService.getUserCredentials());
+        this.userCredsSubscription = this.authService.getUserCredentialSubscription()
+            .subscribe({
+                next: (userCreds: UserCredential) => {
+                    // console.log(userCreds);
+                    this.userCreds = userCreds;
+                    // debugger
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            });
+
         this.totalSubscription = this.dataService.getTodayTotalSubscription()
             .subscribe({
                 next: (total: number) => {

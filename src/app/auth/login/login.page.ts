@@ -41,9 +41,11 @@ export class LoginPage implements OnInit {
     doLogin(): void {
         this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
             .subscribe({
-                next: (res) => {
-                    console.log(res, 'Login Successfull');
-                    this.router.navigateByUrl(AppRoutes.TABS);
+                next: (userCredentias) => {
+                    console.log(userCredentias, 'Login Successfull');
+                    this.authService.setUserCredentials(userCredentias).subscribe(() => {
+                        this.router.navigateByUrl(AppRoutes.TABS);
+                    });
                 },
                 error: (err) => {
                     console.error(err);

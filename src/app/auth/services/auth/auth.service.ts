@@ -1,23 +1,54 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, of, scheduled, throwError} from 'rxjs';
 import * as firebase from 'firebase';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {LodashService} from '../../../services/lodash/lodash.service';
+import {mergeMap} from 'rxjs/operators';
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnInit {
+
+    private readonly activeUser: BehaviorSubject<boolean>;
+    private readonly userCredentials: BehaviorSubject<UserCredential>;
 
     constructor(
         private fireAuth: AngularFireAuth,
         private _: LodashService,
     ) {
+        this.activeUser = new BehaviorSubject<any>(false);
+        this.userCredentials = new BehaviorSubject<UserCredential>(null);
+    }
+
+    getUserCredentials(): UserCredential {
+        return this.userCredentials.getValue();
+    }
+
+    setUserCredentials(userCredentials: UserCredential): Observable<void> {
+        return of(this.userCredentials.next(userCredentials));
+    }
+
+    getUserCredentialSubscription(): BehaviorSubject<UserCredential> {
+        return this.userCredentials;
+    }
+
+    getActiveUserStatus(): boolean {
+        return this.activeUser.getValue();
+    }
+
+    setActiveUserStatus(status: boolean): Observable<void> {
+        return of(this.activeUser.next(status));
+    }
+
+    getActiveUserSubscription(): BehaviorSubject<boolean> {
+        return this.activeUser;
     }
 
     // loginWithEmailAndPassword
-    loginWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential | void> {
+    loginWithEmailAndPassword(email: string, password: string): Observable<UserCredential> {
         if (!this._.isNull(email) && !this._.isNull(password)) {
-            return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password));
+             return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password));
         } else {
             return throwError('Email Or Password is Null');
         }
@@ -38,6 +69,13 @@ export class AuthService {
         return fromPromise(this.fireAuth.auth.signOut());
     }
 
-    //LoginWithGoogle
+    ngOnInit(): void {
+        this.fireAuth.auth.currentUser.getIdTokenResult().then((token) => {
+            console.log(token);
+            // if(token !== null) {
+            //     this.activeUser.next(true)
+            // }
+        });
+    }
 
 }
