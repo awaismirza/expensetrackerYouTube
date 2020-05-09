@@ -10,6 +10,7 @@ import {DashboardModule} from '../pages/dashboard/dashboard.module';
 import {AccountModule} from '../pages/account/account.module';
 import {ActivityModule} from '../pages/activity/activity.module';
 import {BudgetModule} from '../pages/budget/budget.module';
+import {DatetimeService} from '../services/datetime/datetime.service';
 
 @NgModule({
   imports: [

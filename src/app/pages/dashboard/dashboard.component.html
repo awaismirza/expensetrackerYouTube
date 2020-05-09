@@ -15,8 +15,7 @@
                         <ion-button expand="full" fill="solid" (click)="setCurrentToTodayDate()">Today</ion-button>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button color="primary" expand="full" fill="solid" (click)="selected.open()">Date
-                        </ion-button>
+                        <ion-button color="primary" expand="full" fill="solid" (click)="selected.open()">Date</ion-button>
                         <ion-datetime hidden
                                       #selected
                                       [value]="selectedDate.toISOString()"
@@ -29,14 +28,16 @@
                         <ion-button expand="full" fill="solid" (click)="selectedValue.open()">Type</ion-button>
                         <ion-item hidden>
                             <ion-select interface="popover" #selectedValue>
-                                <ion-select-option *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
+                                <ion-select-option
+                                        *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
                     <ion-col size="3">
                         <ion-button expand="full" fill="solid" (click)="priceFilter()">
                             <ion-icon name="logo-usd"></ion-icon>
-                            <ion-icon *ngIf="filterByPrice" [name]="filterByPriceUp ? 'arrow-up' : 'arrow-down'"></ion-icon>
+                            <ion-icon *ngIf="filterByPrice"
+                                      [name]="filterByPriceUp ? 'arrow-up' : 'arrow-down'"></ion-icon>
                         </ion-button>
                     </ion-col>
                 </ion-row>

@@ -1,16 +1,14 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
-
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DataService} from './services/data/data.service';
-import {ActionService} from './services/action/action.service';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,14 +17,12 @@ import {ActionService} from './services/action/action.service';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AuthModule,
     ],
     providers: [
-        StatusBar,
-        SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-        DataService,
-        ActionService
     ],
     bootstrap: [AppComponent]
 })

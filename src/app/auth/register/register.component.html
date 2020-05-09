@@ -1,0 +1,45 @@
+<ion-header>
+    <!--    <ion-toolbar>-->
+    <!--        <ion-title>login</ion-title>-->
+    <!--    </ion-toolbar>-->
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center expandHeight">
+            <ion-col size="12" class="ion-align-self-center">
+                <ion-card #registerCard id="registerCard">
+                    <ion-card-header>
+                        <ion-card-title class="ion-text-center">Register</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
+                            <ion-item-group>
+                                <ion-item lines="full">
+                                    <ion-input placeholder="Name" formControlName="name" type="text" inputmode="text"></ion-input>
+                                </ion-item>
+                                <ion-item lines="full">
+                                    <ion-input placeholder="Email" formControlName="email" type="email" inputmode="email"></ion-input>
+                                </ion-item>
+                                <ion-item lines="full">
+                                      <ion-input placeholder="Password" formControlName="password"
+                                               [type]="showPassword ? 'text': 'password'"></ion-input>
+                                    <ion-icon [name]="showPassword ? 'eye-off': 'eye'" size="large"
+                                              (click)="togglePasswordFieldType()"></ion-icon>
+                                </ion-item>
+                                <ion-item lines="full">
+                                     <ion-input placeholder="Confirm Password" formControlName="passwordConfirm"
+                                               [type]="showPassword ? 'text': 'password'"></ion-input>
+                                </ion-item>
+                                <ion-button expand="block" type="submit" [disabled]="!registerForm.valid"> Register
+                                </ion-button>
+                                <ion-button fill="outline" size="small" color="success" [routerLink]="['/auth/login']">Login
+                                </ion-button>
+                            </ion-item-group>
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
