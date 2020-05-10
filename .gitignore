@@ -33,3 +33,4 @@ ios
 android
 .gradle
 /src/environments/environment.ts
+/src/environments/environment.prod.ts
