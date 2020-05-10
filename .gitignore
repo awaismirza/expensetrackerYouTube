@@ -32,5 +32,4 @@ npm-debug.log*
 ios
 android
 .gradle
-/src/environments/environment.ts
-/src/environments/environment.prod.ts
+/src/environments/*.ts
