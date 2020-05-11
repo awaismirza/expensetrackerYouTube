@@ -4,6 +4,9 @@ import {AuthService} from '../services/auth/auth.service';
 import {KeyboardResize, Plugins} from '@capacitor/core';
 import {Router} from '@angular/router';
 import {AppRoutes} from '../../constants/constants';
+import {forkJoin, of} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
+import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Component({
     selector: 'app-login',
@@ -19,7 +22,7 @@ export class LoginPage implements OnInit {
     showPassword = false;
 
     private loginForm: FormGroup = new FormGroup({
-        email: new FormControl('test2@gmail.com', [Validators.required, Validators.email]),
+        email: new FormControl('test1@gmail.com', [Validators.required, Validators.email]),
         password: new FormControl('hello123', [Validators.required, Validators.min(8)])
     });
 
@@ -40,12 +43,21 @@ export class LoginPage implements OnInit {
 
     doLogin(): void {
         this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
+            .pipe(
+                mergeMap((userCredential) => {
+                    return this.authService.setUserCredentials(userCredential);
+                }),
+                mergeMap(() => {
+                    return this.authService.setActiveUserStatus(true);
+                }),
+                mergeMap(() => {
+                    return fromPromise(this.router.navigateByUrl(AppRoutes.TABS));
+                })
+            )
             .subscribe({
-                next: (userCredentias) => {
-                    console.log(userCredentias, 'Login Successfull');
-                    this.authService.setUserCredentials(userCredentias).subscribe(() => {
-                        this.router.navigateByUrl(AppRoutes.TABS);
-                    });
+                next: (x) => {
+                    console.log(this.authService.getActiveUserStatus(), 'Active User Status');
+                    console.log(this.authService.getUserCredentials(), 'User Credentials');
                 },
                 error: (err) => {
                     console.error(err);

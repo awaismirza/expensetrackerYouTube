@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActionSheetController, ModalController} from '@ionic/angular';
 import {AddExpenseComponent} from '../../shared/components/add-expense/add-expense.component';
 import {DataService} from '../../services/data/data.service';
@@ -9,13 +9,14 @@ import {ExpenseTypes} from '../../constants/constants';
 import {ExpenseStorageService} from '../../services/storage/expense-storage.service';
 import UserCredential = firebase.auth.UserCredential;
 import {AuthService} from '../../auth/services/auth/auth.service';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     expenses: ExpenseInterface[];
 
@@ -45,6 +46,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private actionSheetController: ActionSheetController,
         private expenseService: ExpenseStorageService,
         private authService: AuthService,
+        private fireAuth: AngularFireAuth,
     ) {
         this.installDate = this.datetimeService.installDate;
         this.todayDate = this.datetimeService.getCurrentDateTime();
@@ -55,19 +57,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        console.log(this.authService.getUserCredentials());
-        this.userCredsSubscription = this.authService.getUserCredentialSubscription()
-            .subscribe({
-                next: (userCreds: UserCredential) => {
-                    // console.log(userCreds);
-                    this.userCreds = userCreds;
-                    // debugger
-                },
-                error: (err) => {
-                    console.log(err);
-                }
-            });
-
         this.totalSubscription = this.dataService.getTodayTotalSubscription()
             .subscribe({
                 next: (total: number) => {
@@ -175,6 +164,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 }]
         });
         await actionSheet.present();
+    }
+
+    ngAfterViewInit(): void {
+        this.fireAuth.authState.subscribe((res) => {
+            console.log(res);
+        });
+        // this.userCredsSubscription = this.authService.getUserCredentialSubscription()
+        //     .subscribe({
+        //         next: (userCreds: UserCredential) => {
+        //             // console.log(userCreds);
+        //             this.userCreds = userCreds;
+        //             // debugger
+        //         },
+        //         error: (err) => {
+        //             console.log(err);
+        //         }
+        //     });
+
     }
 
 }

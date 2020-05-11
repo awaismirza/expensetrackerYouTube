@@ -10,14 +10,14 @@ import UserCredential = firebase.auth.UserCredential;
 @Injectable()
 export class AuthService implements OnInit {
 
-    private readonly activeUser: BehaviorSubject<boolean>;
+    private readonly activeUserStatus: BehaviorSubject<boolean>;
     private readonly userCredentials: BehaviorSubject<UserCredential>;
 
     constructor(
         private fireAuth: AngularFireAuth,
         private _: LodashService,
     ) {
-        this.activeUser = new BehaviorSubject<any>(false);
+        this.activeUserStatus = new BehaviorSubject<any>(null);
         this.userCredentials = new BehaviorSubject<UserCredential>(null);
     }
 
@@ -34,15 +34,15 @@ export class AuthService implements OnInit {
     }
 
     getActiveUserStatus(): boolean {
-        return this.activeUser.getValue();
+        return this.activeUserStatus.getValue();
     }
 
     setActiveUserStatus(status: boolean): Observable<void> {
-        return of(this.activeUser.next(status));
+        return of(this.activeUserStatus.next(status));
     }
 
     getActiveUserSubscription(): BehaviorSubject<boolean> {
-        return this.activeUser;
+        return this.activeUserStatus;
     }
 
     // loginWithEmailAndPassword
@@ -73,7 +73,7 @@ export class AuthService implements OnInit {
         this.fireAuth.auth.currentUser.getIdTokenResult().then((token) => {
             console.log(token);
             // if(token !== null) {
-            //     this.activeUser.next(true)
+            //     this.activeUserStatus.next(true)
             // }
         });
     }
