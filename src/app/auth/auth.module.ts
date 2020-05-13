@@ -7,6 +7,7 @@ import {AuthService} from './services/auth/auth.service';
 import {AuthComponent} from './auth.component';
 import {IonicModule} from '@ionic/angular';
 import {RegisterComponent} from './register/register.component';
+import {AuthGuard} from './guards/auth/auth.guard';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {RegisterComponent} from './register/register.component';
     ],
     providers: [
         AngularFireAuth,
-        AuthService
+        AuthService,
+        AuthGuard,
     ],
 })
 export class AuthModule {

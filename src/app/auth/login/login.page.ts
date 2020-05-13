@@ -5,7 +5,7 @@ import {KeyboardResize, Plugins} from '@capacitor/core';
 import {Router} from '@angular/router';
 import {AppRoutes} from '../../constants/constants';
 import {forkJoin, of} from 'rxjs';
-import {mergeMap} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Component({
@@ -44,20 +44,17 @@ export class LoginPage implements OnInit {
     doLogin(): void {
         this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
             .pipe(
-                mergeMap((userCredential) => {
-                    return this.authService.setUserCredentials(userCredential);
+                map((userCredential) => {
+                    if (userCredential === null) {
+                        return false;
+                    }
+                    this.authService.setUserCredentials(userCredential);
+                    this.authService.setActiveUserStatus(true);
                 }),
-                mergeMap(() => {
-                    return this.authService.setActiveUserStatus(true);
-                }),
-                mergeMap(() => {
-                    return fromPromise(this.router.navigateByUrl(AppRoutes.TABS));
-                })
             )
             .subscribe({
-                next: (x) => {
-                    console.log(this.authService.getActiveUserStatus(), 'Active User Status');
-                    console.log(this.authService.getUserCredentials(), 'User Credentials');
+                next: () => {
+                    this.router.navigateByUrl(AppRoutes.TABS);
                 },
                 error: (err) => {
                     console.error(err);

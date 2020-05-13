@@ -9,7 +9,7 @@ import {
     RouterStateSnapshot,
     UrlTree
 } from '@angular/router';
-import {Observable, of} from 'rxjs';
+import {forkJoin, Observable, of} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
 import {FirebaseAuth} from '@angular/fire';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -19,16 +19,17 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     constructor(
-        private authService: AuthService,
+        private fireAuth: AngularFireAuth
     ) {
     }
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const val = this.authService.getActiveUserStatus();
-        console.log(val);
-        return this.authService.getActiveUserStatus();
+
+        return forkJoin(this.fireAuth.authState.subscribe((res) => {
+            return res !== null;
+        }));
     }
 
     canActivateChild(
