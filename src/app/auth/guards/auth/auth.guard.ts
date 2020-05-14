@@ -11,26 +11,32 @@ import {
 } from '@angular/router';
 import {forkJoin, Observable} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
-import {AppRoutes} from '../../../constants/constants';
+import {AppRoutes, StorageKeys} from '../../../constants/constants';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
+import {StorageService} from '../../../services/storage/storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     constructor(
-        private authService: AuthService,
         private router: Router,
+        private storageService: StorageService
     ) {
     }
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const a = this.authService.getCurrentUserStatus()
-        console.log(a);
-        return this.authService.getCurrentUserStatus() !== null ? true : this.router.navigateByUrl(AppRoutes.AUTH);
+        return this.storageService.getFromLocalStorage(StorageKeys.ACTIVE_USER).then((response) => {
+            if (response !== null && response === true) {
+                return true;
+            } else {
+                this.router.navigateByUrl(AppRoutes.AUTH);
+            }
+        });
+
     }
 
     canActivateChild(

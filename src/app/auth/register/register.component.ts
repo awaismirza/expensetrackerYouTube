@@ -54,11 +54,8 @@ export class RegisterComponent implements OnInit {
 
     doRegister(): void {
         this.authService.registerWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
-           .then((userCredential) => {
-                this.authService.setUserCredentials(userCredential);
-            })
-            .then(() => {
-                return this.router.navigateByUrl(AppRoutes.TABS);
+            .then((response) => {
+                return response !== null ? this.router.navigateByUrl(AppRoutes.TABS) : false;
             })
             .then((bool) => {
                 bool ? console.log('Successfully Logged In') : console.log('Login Failed');

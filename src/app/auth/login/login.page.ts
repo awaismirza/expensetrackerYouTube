@@ -7,6 +7,7 @@ import {AppRoutes} from '../../constants/constants';
 import {forkJoin, of} from 'rxjs';
 import {map, mergeMap} from 'rxjs/operators';
 import {fromPromise} from 'rxjs/internal-compatibility';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
     selector: 'app-login',
@@ -29,6 +30,7 @@ export class LoginPage implements OnInit {
     constructor(
         private authService: AuthService,
         private router: Router,
+        private fireAuth: AngularFireAuth,
     ) {
         Plugins.Device.getInfo().then((deviceInfo) => {
             if (deviceInfo.platform !== 'web') {
@@ -43,11 +45,9 @@ export class LoginPage implements OnInit {
 
     doLogin(): void {
         this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
-            .then((userCredential) => {
-                this.authService.setUserCredentials(userCredential);
-            })
             .then(() => {
                 return this.router.navigateByUrl(AppRoutes.TABS);
+                // return this.router.navigateByUrl(AppRoutes.TABS);
             })
             .then((bool) => {
                 bool ? console.log('Successfully Logged In') : console.log('Login Failed');
@@ -59,5 +59,6 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.fireAuth.auth.currentUser);
     }
 }

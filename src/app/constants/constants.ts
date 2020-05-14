@@ -1,5 +1,6 @@
 export enum StorageKeys {
-    INSTALL_DATE = 'INSTALL_DATE'
+    INSTALL_DATE = 'INSTALL_DATE',
+    ACTIVE_USER = 'ACTIVE_USER',
 }
 
 export enum AppRoutes {

@@ -2,9 +2,12 @@ import {Component} from '@angular/core';
 
 import {Platform} from '@ionic/angular';
 import {StorageService} from './services/storage/storage.service';
-import {StorageKeys} from './constants/constants';
+import {AppRoutes, StorageKeys} from './constants/constants';
 import {DatetimeService} from './services/datetime/datetime.service';
 import {KeyboardResize, Plugins} from '@capacitor/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +19,8 @@ export class AppComponent {
         private platform: Platform,
         private storageService: StorageService,
         private datetimeService: DatetimeService,
+        private fireAuth: AngularFireAuth,
+        private router: Router,
     ) {
         this.initializeApp().then(() => {
             this.initializeInstallDate();
@@ -24,23 +29,29 @@ export class AppComponent {
 
     async initializeApp(): Promise<void> {
         return await this.platform.ready().then(() => {
-            Plugins.Device.getInfo().then((deviceInfo) => {
-                if (deviceInfo.platform !== 'web') {
-                    Plugins.SplashScreen.hide();
-                    Plugins.StatusBar.show();
-                }
-
+            this.fireAuth.auth.onAuthStateChanged((user) => {
+                user !== null
+                    ? this.storageService.saveToLocalStorage(StorageKeys.ACTIVE_USER, true)
+                    : this.storageService.saveToLocalStorage(StorageKeys.ACTIVE_USER, false);
+                this.router.navigateByUrl(AppRoutes.TABS)
+                    .then((bool) => {
+                        return Plugins.Device.getInfo();
+                    })
+                    .then((deviceInfo) => {
+                        deviceInfo.platform !== 'web'
+                            ? Plugins.SplashScreen.hide()
+                            : Plugins.StatusBar.show();
+                    });
             });
         });
     }
 
     initializeInstallDate(): void {
-        this.storageService.getFromLocalStorage(StorageKeys.INSTALL_DATE).then((val) => {
-            if (val) {
-                this.datetimeService.installDate = val;
-            } else {
-                this.storageService.saveToLocalStorage(StorageKeys.INSTALL_DATE, this.datetimeService.getCurrentDateTime());
-            }
-        });
+        this.storageService.getFromLocalStorage(StorageKeys.INSTALL_DATE)
+            .then(
+                (val) => {
+                    val ? this.datetimeService.installDate = val
+                        : this.storageService.saveToLocalStorage(StorageKeys.INSTALL_DATE, this.datetimeService.getCurrentDateTime());
+                });
     }
 }

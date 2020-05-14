@@ -11,30 +11,24 @@ import UserCredential = firebase.auth.UserCredential;
 })
 export class AuthService implements OnInit {
 
-    private userCredentials: BehaviorSubject<UserCredential>;
+    private currentUserStatus: boolean;
 
     constructor(
         private fireAuth: AngularFireAuth,
         private _: LodashService,
     ) {
-        this.userCredentials = new BehaviorSubject<UserCredential>(null);
+        // this.fireAuth.auth.onAuthStateChanged((result) => {
+        //     result !== null ? this.currentUserStatus = true : this.currentUserStatus = false;
+        // });
     }
 
 
-    async getCurrentUserStatus() {
-        return await this.fireAuth.authState.toPromise();
+    async getCurrentUserStatus(): Promise<boolean> {
+        return this.currentUserStatus;
     }
 
-    getUserCredentials(): UserCredential {
-        return this.userCredentials.getValue();
-    }
-
-    setUserCredentials(userCredentials: UserCredential): void {
-        this.userCredentials.next(userCredentials);
-    }
-
-    getUserCredentialSubscription(): BehaviorSubject<UserCredential> {
-        return this.userCredentials;
+    async setCurrentUserStatus(status: boolean): Promise<void> {
+        this.currentUserStatus = status;
     }
 
     async loginWithEmailAndPassword(email: string, password: string): Promise<UserCredential> {
