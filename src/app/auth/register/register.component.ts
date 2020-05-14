@@ -54,13 +54,15 @@ export class RegisterComponent implements OnInit {
 
     doRegister(): void {
         this.authService.registerWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
-            .subscribe({
-                next: (res) => {
-                    if (res !== null) {
-                        this.router.navigateByUrl(AppRoutes.LOGIN);
-                    }
-                }
-            });
+           .then((userCredential) => {
+                this.authService.setUserCredentials(userCredential);
+            })
+            .then(() => {
+                return this.router.navigateByUrl(AppRoutes.TABS);
+            })
+            .then((bool) => {
+                bool ? console.log('Successfully Logged In') : console.log('Login Failed');
+            }).catch(err => console.log(err));
     }
 
     ngOnInit(): void {

@@ -5,14 +5,14 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: 'AIzaSyA4_gSavmV71_TCDa2_5FmnFnjfndnvmuM',
-        authDomain: 'expencetracker-99819.firebaseapp.com',
-        databaseURL: 'https://expencetracker-99819.firebaseio.com',
-        projectId: 'expencetracker-99819',
-        storageBucket: 'expencetracker-99819.appspot.com',
-        messagingSenderId: '760175024638',
-        appId: '1:760175024638:web:dc39bf487301674f1b88af',
-        measurementId: 'G-LXG8NSVLDB'
+        apiKey: 'AIzaSyBtSMQfxMgwVW_XAv_xeTkkllwv2fCWUTY',
+        authDomain: 'expensetracker-d4f27.firebaseapp.com',
+        databaseURL: 'https://expensetracker-d4f27.firebaseio.com',
+        projectId: 'expensetracker-d4f27',
+        storageBucket: 'expensetracker-d4f27.appspot.com',
+        messagingSenderId: '33082304221',
+        appId: '1:33082304221:web:7eee03ff0ec87bc45add34',
+        measurementId: 'G-3NMPQJGM81'
     }
 };
 

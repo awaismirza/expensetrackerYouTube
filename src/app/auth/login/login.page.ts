@@ -43,23 +43,15 @@ export class LoginPage implements OnInit {
 
     doLogin(): void {
         this.authService.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
-            .pipe(
-                map((userCredential) => {
-                    if (userCredential === null) {
-                        return false;
-                    }
-                    this.authService.setUserCredentials(userCredential);
-                    this.authService.setActiveUserStatus(true);
-                }),
-            )
-            .subscribe({
-                next: () => {
-                    this.router.navigateByUrl(AppRoutes.TABS);
-                },
-                error: (err) => {
-                    console.error(err);
-                }
-            });
+            .then((userCredential) => {
+                this.authService.setUserCredentials(userCredential);
+            })
+            .then(() => {
+                return this.router.navigateByUrl(AppRoutes.TABS);
+            })
+            .then((bool) => {
+                bool ? console.log('Successfully Logged In') : console.log('Login Failed');
+            }).catch(err => console.log(err));
     }
 
     togglePasswordFieldType(): void {

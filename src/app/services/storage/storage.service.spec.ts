@@ -52,7 +52,4 @@ describe('StorageService', () => {
             doneFn();
         });
     });
-
-
-
 });

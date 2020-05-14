@@ -11,7 +11,6 @@ import UserCredential = firebase.auth.UserCredential;
 })
 export class AuthService implements OnInit {
 
-    private activeUserStatus: boolean;
     private userCredentials: BehaviorSubject<UserCredential>;
 
     constructor(
@@ -19,6 +18,11 @@ export class AuthService implements OnInit {
         private _: LodashService,
     ) {
         this.userCredentials = new BehaviorSubject<UserCredential>(null);
+    }
+
+
+    async getCurrentUserStatus() {
+        return await this.fireAuth.authState.toPromise();
     }
 
     getUserCredentials(): UserCredential {
@@ -33,41 +37,23 @@ export class AuthService implements OnInit {
         return this.userCredentials;
     }
 
-    getActiveUserStatus(x?: boolean): boolean {
-        if (x) {
-            console.log('getting from auth guard');
-        }
-        return this.activeUserStatus;
-    }
-
-    setActiveUserStatus(status: boolean): void {
-        console.log('Setting Status to True');
-        this.activeUserStatus = status;
-        console.log(this.activeUserStatus);
-    }
-
-    // loginWithEmailAndPassword
-    loginWithEmailAndPassword(email: string, password: string): Observable<UserCredential> {
+    async loginWithEmailAndPassword(email: string, password: string): Promise<UserCredential> {
         if (!this._.isNull(email) && !this._.isNull(password)) {
-            return fromPromise(this.fireAuth.auth.signInWithEmailAndPassword(email, password));
-        } else {
-            return throwError('Email Or Password is Null');
+            return this.fireAuth.auth.signInWithEmailAndPassword(email, password);
         }
     }
 
 
     // RegisterWithEmailAndPassword
-    registerWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential> {
+    async registerWithEmailAndPassword(email: string, password: string): Promise<UserCredential> {
         if (!this._.isNull(email) && !this._.isNull(password)) {
-            return fromPromise(this.fireAuth.auth.createUserWithEmailAndPassword(email, password));
-        } else {
-            throwError('Pass Correct Email and Password');
+            return await this.fireAuth.auth.createUserWithEmailAndPassword(email, password);
         }
     }
 
     // Logout
-    logout(): Observable<void> {
-        return fromPromise(this.fireAuth.auth.signOut());
+    async logout(): Promise<void> {
+        return await this.fireAuth.auth.signOut();
     }
 
     ngOnInit(): void {

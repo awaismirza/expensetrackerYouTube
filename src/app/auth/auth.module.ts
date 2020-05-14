@@ -21,8 +21,6 @@ import {AuthGuard} from './guards/auth/auth.guard';
     ],
     providers: [
         AngularFireAuth,
-        AuthService,
-        AuthGuard,
     ],
 })
 export class AuthModule {

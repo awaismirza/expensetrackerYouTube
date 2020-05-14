@@ -5,7 +5,8 @@ export enum StorageKeys {
 export enum AppRoutes {
     LOGIN = '/auth/login',
     REGISTER = '/auth/register',
-    TABS = '/tabs'
+    TABS = '/tabs',
+    AUTH = '/auth'
 
 }
 

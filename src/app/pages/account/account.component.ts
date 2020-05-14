@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
     }
 
     doLogout(): void {
-        this.authService.logout().subscribe(() => {
+        this.authService.logout().then(() => {
             this.router.navigateByUrl(AppRoutes.LOGIN);
             console.log('Reset Done Moving to Login Page');
         }, error => console.log(error));

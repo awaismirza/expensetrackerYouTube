@@ -89,13 +89,10 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
                     } else {
                         this.expenses = [];
                     }
-                    console.log(expense);
                 },
                 error: (err) => {
                     console.log(err);
                 },
-                complete: () => {
-                }
             });
     }
 
