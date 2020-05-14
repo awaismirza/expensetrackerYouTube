@@ -4,16 +4,6 @@
 
 export const environment = {
     production: false,
-    firebase: {
-        apiKey: 'AIzaSyBtSMQfxMgwVW_XAv_xeTkkllwv2fCWUTY',
-        authDomain: 'expensetracker-d4f27.firebaseapp.com',
-        databaseURL: 'https://expensetracker-d4f27.firebaseio.com',
-        projectId: 'expensetracker-d4f27',
-        storageBucket: 'expensetracker-d4f27.appspot.com',
-        messagingSenderId: '33082304221',
-        appId: '1:33082304221:web:7eee03ff0ec87bc45add34',
-        measurementId: 'G-3NMPQJGM81'
-    }
 };
 
 /*
